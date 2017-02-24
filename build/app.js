@@ -98,7 +98,7 @@
 	          onChange: function onChange(prevState, nextState) {
 	            var w = window.innerWidth || document.documentElement.clientWidth || document.body.clientWidth;
 	            var h = window.scrollY;
-	            if (w < 700) {
+	            if (w < 700 && h > 60) {
 	              if (nextState.params.piece) {
 	                var interval = (h - 60) / 10;
 	                var smooth = setInterval(function () {
@@ -121,7 +121,7 @@
 	                  }
 	                }, 25);
 	              }
-	            } else {
+	            } else if (w > 700) {
 	              if (nextState.params.piece) {
 	                var interval = (h - 200) / 10;
 	                var smooth = setInterval(function () {
@@ -35843,7 +35843,7 @@
 	        this.setState({ dragEnd: e.touches[0].clientX, direction: direction });
 	      } else if (e.type === "touchend") {
 	        if (Math.abs(this.state.dragStart - this.state.dragEnd) > 150) {
-	          var updateIndex = this.state.direction === "left" ? this.props.decrementIndex(currentIndex, length) : this.props.incrementIndex(currentIndex, length);
+	          var updateIndex = this.state.direction === "left" ? this.props.incrementIndex(currentIndex, length) : this.props.decrementIndex(currentIndex, length);
 	        }
 	        this.setState({ direction: direction, dragStart: null, dragEnd: null });
 	      }
@@ -35923,7 +35923,6 @@
 			var _this = _possibleConstructorReturn(this, (ShowcaseContainer.__proto__ || Object.getPrototypeOf(ShowcaseContainer)).call(this, props));
 
 			_this.state = {
-				xOffset: _this.props.windowWidth < 500 ? -_this.props.windowWidth : -200 - 100 * (_this.props.params.number - 1),
 				sliding: false,
 				transition: '0.5s'
 			};
@@ -35936,6 +35935,7 @@
 		_createClass(ShowcaseContainer, [{
 			key: 'render',
 			value: function render() {
+				var xOffset = this.props.windowWidth < 500 ? -this.props.windowWidth : -200 - 100 * (this.props.params.number - 1);
 				var showcaseNumber = this.props.params.piece ? +this.props.params.piece + 1 : 0;
 				var showcaseItem = this.props.images[showcaseNumber];
 				var dimensions = showcaseItem.dimensions;
@@ -35957,7 +35957,7 @@
 					'div',
 					{ className: 'showcase-container' },
 					_react2.default.createElement(_showcase2.default, _extends({}, this.props, this.state, { setIndex: setIndex, incrementIndex: incrementIndex, decrementIndex: decrementIndex, showcaseNumber: showcaseNumber, showcaseIndex: showcaseIndex, iframeWidth: iframeWidth, iframeHeight: iframeHeight, itemHeight: itemHeight, itemWidth: itemWidth })),
-					_react2.default.createElement(_showcaseSlider2.default, _extends({}, this.props, this.state, { setIndex: setIndex, incrementIndex: incrementIndex, decrementIndex: decrementIndex, showcaseNumber: showcaseNumber, showcaseIndex: showcaseIndex })),
+					_react2.default.createElement(_showcaseSlider2.default, _extends({}, this.props, this.state, { xOffset: xOffset, setIndex: setIndex, incrementIndex: incrementIndex, decrementIndex: decrementIndex, showcaseNumber: showcaseNumber, showcaseIndex: showcaseIndex })),
 					_react2.default.createElement(_showcaseDetails2.default, { showcaseItem: showcaseItem })
 				);
 			}
@@ -36414,7 +36414,7 @@
 	  "year": 2016,
 	  "client": "The Fresh Toast Magazine",
 	  "description": "What I Ate Today: Old Bus Tavern David Zboray",
-	  "shape": 1,
+	  "shape": 3,
 	  "bthumb": "data:image/gif;base64,R0lGODlhAQABAIABAODaygAAACwAAAAAAQABAAACAkQBAA==",
 	  "brick": "https://s3-us-west-1.amazonaws.com/zeport/zesansan.com+/Photography/01+Fresh+Toast/Brick/01+Popsons2_br.jpg",
 	  "thumbs": ["https://s3-us-west-1.amazonaws.com/zeport/zesansan.com+/Photography/01+Fresh+Toast/Thumbs/01+Portrait+2_thumb.jpg", "https://s3-us-west-1.amazonaws.com/zeport/zesansan.com+/Photography/01+Fresh+Toast/Thumbs/02+Popsons2_thumb.jpg", "https://s3-us-west-1.amazonaws.com/zeport/zesansan.com+/Photography/01+Fresh+Toast/Thumbs/03+Popsons1_thumb.jpg", "https://s3-us-west-1.amazonaws.com/zeport/zesansan.com+/Photography/01+Fresh+Toast/Thumbs/04+Mourad2_thumb.jpg", "https://s3-us-west-1.amazonaws.com/zeport/zesansan.com+/Photography/01+Fresh+Toast/Thumbs/05+ODB1_thumb.jpg"],
@@ -36515,7 +36515,7 @@
 	  "year": 2013,
 	  "materials": "Gouache on paper",
 	  "description": "For the Best in Show group exhibition at Double Punch Gallery in SF.",
-	  "shape": 1,
+	  "shape": 3,
 	  "bthumb": "data:image/gif;base64,R0lGODlhAQABAIABADpgUwAAACwAAAAAAQABAAACAkQBAA==",
 	  "brick": "https://s3-us-west-1.amazonaws.com/zeport/zesansan.com+/Illustration/04+Winston/Brick/04+Winston_web_br.jpg",
 	  "thumbs": ["https://s3-us-west-1.amazonaws.com/zeport/zesansan.com+/Illustration/04+Winston/Brick/04+Winston_web_br.jpg"],
@@ -36565,7 +36565,7 @@
 	  "year": 2012,
 	  "materials": "Pen & Ink, Digital",
 	  "description": "Victor Volcano is planning a party for his main squeeze - Betty Boulder. But will the party ever happen when Victor discovers scandalous secrets about his girlfriend? 40 pages, black and white.",
-	  "shape": 1,
+	  "shape": 3,
 	  "bthumb": "data:image/gif;base64,R0lGODlhAQABAIABAMzMzAAAACwAAAAAAQABAAACAkQBAA==",
 	  "brick": "https://s3-us-west-1.amazonaws.com/zeport/zesansan.com+/Comic/03+Party+Plans/PP+1/Brick/03+pp1_cover_br.jpg",
 	  "thumbs": ["https://s3-us-west-1.amazonaws.com/zeport/zesansan.com+/Comic/03+Party+Plans/PP+1/Thumbs/01+pp1_cover_thumb.jpg", "https://s3-us-west-1.amazonaws.com/zeport/zesansan.com+/Comic/03+Party+Plans/PP+1/Thumbs/02+pp4_web_thumb.jpg", "https://s3-us-west-1.amazonaws.com/zeport/zesansan.com+/Comic/03+Party+Plans/PP+1/Thumbs/03+pp14_web_thumb.jpg", "https://s3-us-west-1.amazonaws.com/zeport/zesansan.com+/Comic/03+Party+Plans/PP+1/Thumbs/04+pp17_web_thumb.jpg", "https://s3-us-west-1.amazonaws.com/zeport/zesansan.com+/Comic/03+Party+Plans/PP+1/Thumbs/05+pp22_web_thumb.jpg", "https://s3-us-west-1.amazonaws.com/zeport/zesansan.com+/Comic/03+Party+Plans/PP+1/Thumbs/06+pp24_web_thumb.jpg", "https://s3-us-west-1.amazonaws.com/zeport/zesansan.com+/Comic/03+Party+Plans/PP+1/Thumbs/07+snakebomb2_pg2_web_thumb.jpg", "https://s3-us-west-1.amazonaws.com/zeport/zesansan.com+/Comic/03+Party+Plans/PP+1/Thumbs/08+snakebomb2_pg3-4_web_thumb.jpg", "https://s3-us-west-1.amazonaws.com/zeport/zesansan.com+/Comic/03+Party+Plans/PP+1/Thumbs/09+2012_7_partyplansone_thumb.jpg"],
@@ -36588,7 +36588,7 @@
 	  "type": "Illustration",
 	  "year": 2013,
 	  "materials": "Digital",
-	  "shape": 3,
+	  "shape": 1,
 	  "client": "Dirt Rag Mag. Thanks AD Matt Kaprsyk.",
 	  "bthumb": "data:image/gif;base64,R0lGODlhAQABAIABAPa9RgAAACwAAAAAAQABAAACAkQBAA==",
 	  "brick": "https://s3-us-west-1.amazonaws.com/zeport/zesansan.com+/Illustration/09+Last+Chance/Brick/09+ZS_lastchance_web_br.jpg",
@@ -36787,7 +36787,7 @@
 	  "materials": "Pen & Ink, Digital",
 	  "client": "Vice",
 	  "description": "Based on a true story. AD Nick Gazin.",
-	  "shape": 1,
+	  "shape": 3,
 	  "bthumb": "data:image/gif;base64,R0lGODlhAQABAIABAAUFNQAAACwAAAAAAQABAAACAkQBAA==",
 	  "brick": "https://s3-us-west-1.amazonaws.com/zeport/zesansan.com+/Comic/05+DUI/Brick/06+DUI4_web_br.jpg",
 	  "thumbs": ["https://s3-us-west-1.amazonaws.com/zeport/zesansan.com+/Comic/05+DUI/Thumbs/01+DUI1_web_thumb.jpg", "https://s3-us-west-1.amazonaws.com/zeport/zesansan.com+/Comic/05+DUI/Thumbs/02+DUI2_web_thumb.jpg", "https://s3-us-west-1.amazonaws.com/zeport/zesansan.com+/Comic/05+DUI/Thumbs/03+DUI3_web_thumb.jpg", "https://s3-us-west-1.amazonaws.com/zeport/zesansan.com+/Comic/05+DUI/Thumbs/04+DUI4_web_thumb.jpg"],
