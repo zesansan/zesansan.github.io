@@ -162,7 +162,8 @@ svg:hover {
   vertical-align: middle;
   line-height: 60px;
   font-family: Helvetica, sans-serif;
-  font-weight: bold; }
+  font-weight: bold;
+  height: 140px; }
 
 .title:hover {
   color: aquamarine;
