@@ -36189,7 +36189,7 @@
 	      var showcaseItem = this.props.showcaseItem;
 
 	      var slideshow = showcaseItem.slideshow;
-	      var landscape = (showcaseItem.type === 'Animation' || showcaseItem.type === 'Film') && slideshow[0].indexOf('gif') === -1;
+	      var landscape = (showcaseItem.type === 'Animation' || showcaseItem.type === 'Video') && slideshow[0].indexOf('gif') === -1;
 	      var name = showcaseItem.name,
 	          year = showcaseItem.year,
 	          materials = showcaseItem.materials,

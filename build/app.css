@@ -463,7 +463,7 @@ strong {
   font-style: italic; }
 
 .landscape {
-  width: 640px; }
+  width: 90%; }
 
 .example-appear {
   opacity: 0.01; }
