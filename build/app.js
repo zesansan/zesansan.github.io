@@ -35940,8 +35940,8 @@
 				var showcaseItem = this.props.images[showcaseNumber];
 				var dimensions = showcaseItem.dimensions;
 				var showcaseIndex = this.props.params.number ? this.props.params.number - 1 : 0;
-				var iframeWidth = windowWidth < 640 ? "100%" : "640px";
-				var iframeHeight = windowWidth < 650 ? windowWidth / 640 * 340 + "px" : "340px";
+				var iframeWidth = windowWidth < 640 ? "100%" : windowWidth * 0.9 + "px";
+				var iframeHeight = windowWidth < 650 ? windowWidth / 640 * 340 + "px" : windowWidth * 0.9 * (340 / 640) + "px";
 
 				var _setItem = (0, _showcaseFunctions.setItem)(windowWidth, showcaseIndex, dimensions),
 				    itemHeight = _setItem.itemHeight,
