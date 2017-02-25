@@ -489,7 +489,7 @@ strong {
   width: 500px;
   height: 100px;
   background: grey;
-  overflow: auto; }
+  overflow: hidden; }
 
 .track {
   display: -ms-flexbox;

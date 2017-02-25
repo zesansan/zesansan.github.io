@@ -98,11 +98,11 @@
 	          onChange: function onChange(prevState, nextState) {
 	            var w = window.innerWidth || document.documentElement.clientWidth || document.body.clientWidth;
 	            var h = window.scrollY;
-	            if (w < 700 && h > 60) {
+	            if (w < 700 && h > 70) {
 	              if (nextState.params.piece) {
-	                var interval = (h - 60) / 10;
+	                var interval = (h - 70) / 10;
 	                var smooth = setInterval(function () {
-	                  if (h > 10) {
+	                  if (h > 71) {
 	                    h -= interval;
 	                    window.scroll(0, h);
 	                  } else {
@@ -111,9 +111,9 @@
 	                }, 25);
 	              }
 	              if (nextState.params.route === "about") {
-	                var interval = (h - 5) / 10;
+	                var interval = (h - 50) / 10;
 	                var smooth = setInterval(function () {
-	                  if (h > 10) {
+	                  if (h > 71) {
 	                    h -= interval;
 	                    window.scroll(0, h);
 	                  } else {
@@ -26589,29 +26589,24 @@
 
 	    _this.state = {
 	      filter: 'All',
-	      windowWidth: 0
+	      windowWidth: 0,
+	      xOffset: _this.windowWidth > 700 ? -200 : -400
 	    };
 	    _this.setFilter = _this.setFilter.bind(_this);
-	    _this.setShowcaseItem = _this.setShowcaseItem.bind(_this);
-	    _this.setShowcaseIndex = _this.setShowcaseIndex.bind(_this);
 	    _this.updateDimensions = _this.updateDimensions.bind(_this);
+	    _this.setOffset = _this.setOffset.bind(_this);
 	    return _this;
 	  }
 
 	  _createClass(Container, [{
+	    key: 'setOffset',
+	    value: function setOffset(newOffset) {
+	      this.setState({ xOffset: newOffset });
+	    }
+	  }, {
 	    key: 'setFilter',
 	    value: function setFilter(newFilter) {
 	      this.setState({ filter: newFilter });
-	    }
-	  }, {
-	    key: 'setShowcaseItem',
-	    value: function setShowcaseItem(index) {
-	      this.setState({ showcaseItem: index, showcaseIndex: 0 });
-	    }
-	  }, {
-	    key: 'setShowcaseIndex',
-	    value: function setShowcaseIndex(index) {
-	      this.setState({ showcaseIndex: index });
 	    }
 	  }, {
 	    key: 'updateDimensions',
@@ -26653,9 +26648,9 @@
 	      return _react2.default.createElement(
 	        'div',
 	        { className: 'container' },
-	        _react2.default.createElement(_header2.default, { windowWidth: this.state.windowWidth, params: this.props.params, setShowcaseItem: this.setShowcaseItem, setFilter: this.setFilter, filter: currentFilter }),
-	        (this.props.params.piece || this.props.params.route === "about") && _react2.default.createElement(_showcaseContainer2.default, _extends({}, this.props, this.state, { setIndex: this.setShowcaseIndex, images: _images2.default })),
-	        _react2.default.createElement(_gallery2.default, { params: this.props.params, setFilter: this.setFilter, setShowcaseItem: this.setShowcaseItem, filter: currentFilter, images: visibleImages }),
+	        _react2.default.createElement(_header2.default, { windowWidth: this.state.windowWidth, params: this.props.params, setFilter: this.setFilter, filter: currentFilter }),
+	        (this.props.params.piece || this.props.params.route === "about") && _react2.default.createElement(_showcaseContainer2.default, _extends({}, this.props, this.state, { setOffset: this.setOffset, images: _images2.default })),
+	        _react2.default.createElement(_gallery2.default, { params: this.props.params, setOffset: this.setOffset, setFilter: this.setFilter, filter: currentFilter, images: visibleImages, windowWidth: this.state.windowWidth }),
 	        _react2.default.createElement(_footer2.default, null)
 	      );
 	    }
@@ -29246,7 +29241,9 @@
 
 	        return _react2.default.createElement(
 	          _reactRouter.Link,
-	          { to: { pathname: '/work/' + index + '/1' }, key: index, className: index + ' grid-item-' + image.shape + ' brick' },
+	          { onClick: function onClick() {
+	              return _this2.props.setOffset(_this2.props.windowWidth < 700 ? -400 : -200);
+	            }, to: { pathname: '/work/' + index + '/1' }, key: index, className: index + ' grid-item-' + image.shape + ' brick' },
 	          _react2.default.createElement(
 	            'div',
 	            { className: 'details' },
@@ -29269,7 +29266,7 @@
 	            _reactProgressiveImage2.default,
 	            { src: image.brick, placeholder: image.bthumb },
 	            function (image) {
-	              return _react2.default.createElement('img', { onClick: _this2.props.setShowcaseItem.bind(_this2, index), className: 'image', src: image });
+	              return _react2.default.createElement('img', { className: 'image', src: image });
 	            }
 	          )
 	        );
@@ -35936,11 +35933,13 @@
 			key: 'render',
 			value: function render() {
 				var showcaseNumber = this.props.params.piece ? +this.props.params.piece + 1 : 0;
+				var _props = this.props,
+				    xOffset = _props.xOffset,
+				    windowWidth = _props.windowWidth;
+
 				var showcaseItem = this.props.images[showcaseNumber];
 				var dimensions = showcaseItem.dimensions;
-				var windowWidth = this.props.windowWidth;
 				var showcaseIndex = this.props.params.number ? this.props.params.number - 1 : 0;
-				var xOffset = windowWidth < 700 ? -400 - 100 * showcaseIndex : -200 - 100 * showcaseIndex;
 				var iframeWidth = windowWidth < 640 ? "100%" : "640px";
 				var iframeHeight = windowWidth < 650 ? windowWidth / 640 * 340 + "px" : "340px";
 
@@ -35964,33 +35963,35 @@
 		}, {
 			key: 'setIndex',
 			value: function setIndex(newIndex, oldIndex, length) {
+				var mobile = this.props.windowWidth < 700;
+				var swingleft = mobile ? -500 : -300;
 				if (!this.state.sliding) {
 					this.setState({ sliding: true });
-					if (newIndex - oldIndex > 3) {
-						var tx = this.state.xOffset + (oldIndex + (length - newIndex)) * 100;
-						this.setState({ xOffset: tx });
-						if (this.state.xOffset > -300) {
+					if (newIndex - oldIndex > 2) {
+						var tx = this.props.xOffset + (oldIndex + (length - newIndex)) * 100;
+						this.props.setOffset(tx);
+						if (this.props.xOffset > swingleft) {
 							setTimeout(function () {
-								this.setState({ transition: '0s', xOffset: this.state.xOffset - length * 100 });
+								this.props.setOffset(this.props.xOffset - length * 100);this.setState({ transition: '0s' });
 							}.bind(this), 550);
 							setTimeout(function () {
 								this.setState({ transition: '0.5s', sliding: false });
 							}.bind(this), 590);
 						}
-					} else if (oldIndex - newIndex > 3) {
-						var _tx = this.state.xOffset - (newIndex + (length - oldIndex)) * 100;
-						this.setState({ xOffset: _tx });
-						if (this.state.xOffset < -200) {
+					} else if (oldIndex - newIndex > 2) {
+						var _tx = this.props.xOffset - (newIndex + (length - oldIndex)) * 100;
+						this.props.setOffset(_tx);
+						if (this.props.xOffset < -200) {
 							setTimeout(function () {
-								this.setState({ transition: '0s', xOffset: this.state.xOffset + length * 100 });
+								this.props.setOffset(this.props.xOffset + length * 100);this.setState({ transition: '0s' });
 							}.bind(this), 550);
 							setTimeout(function () {
 								this.setState({ transition: '0.5s', sliding: false });
 							}.bind(this), 590);
 						}
 					} else {
-						var _tx2 = this.state.xOffset + (oldIndex - newIndex) * 100;
-						this.setState({ xOffset: _tx2, sliding: false });
+						var _tx2 = this.props.xOffset + (oldIndex - newIndex) * 100;
+						this.props.setOffset(_tx2);this.setState({ sliding: false });
 					}
 				}
 				setTimeout(function () {
@@ -36048,16 +36049,16 @@
 
 	function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function, not " + typeof superClass); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass; }
 
-	var Showcase = function (_React$Component) {
-	  _inherits(Showcase, _React$Component);
+	var ShowcaseSlider = function (_React$Component) {
+	  _inherits(ShowcaseSlider, _React$Component);
 
-	  function Showcase(props) {
-	    _classCallCheck(this, Showcase);
+	  function ShowcaseSlider(props) {
+	    _classCallCheck(this, ShowcaseSlider);
 
-	    return _possibleConstructorReturn(this, (Showcase.__proto__ || Object.getPrototypeOf(Showcase)).call(this, props));
+	    return _possibleConstructorReturn(this, (ShowcaseSlider.__proto__ || Object.getPrototypeOf(ShowcaseSlider)).call(this, props));
 	  }
 
-	  _createClass(Showcase, [{
+	  _createClass(ShowcaseSlider, [{
 	    key: 'render',
 	    value: function render() {
 	      var _props = this.props,
@@ -36140,10 +36141,10 @@
 	    }
 	  }]);
 
-	  return Showcase;
+	  return ShowcaseSlider;
 	}(_react2.default.Component);
 
-	exports.default = Showcase;
+	exports.default = ShowcaseSlider;
 
 /***/ },
 /* 298 */
@@ -36292,6 +36293,7 @@
 	  var mobile = !(width > 700);
 	  var showcaseWidth = width * 0.9;
 	  var showcaseHeight = 600;
+	  var proportion = showcaseHeight / showcaseWidth;
 	  if (dimensions) {
 	    numHeight = dimensions[pieceIndex][1].replace(/[px]/gi, '');
 	    numWidth = dimensions[pieceIndex][0].replace(/[px]/gi, '');
@@ -36300,7 +36302,7 @@
 	      itemWidth = "100%";
 	      itemHeight = "auto";
 	    } else {
-	      if (numWidth - showcaseWidth > numHeight - showcaseHeight) {
+	      if (numWidth - showcaseWidth) {
 	        numHeight = showcaseWidth / numWidth * numHeight;
 	        numWidth = showcaseWidth;
 	        //resize tall items to showcase height
@@ -36370,7 +36372,7 @@
 	  "thumbs": ["https://s3-us-west-1.amazonaws.com/zeport/zesansan.com+/Illustration/03+PROWL/Thumbs/01+2015-1-1forest_color_web1_thumb.jpg", "https://s3-us-west-1.amazonaws.com/zeport/zesansan.com+/Illustration/03+PROWL/Thumbs/02+2015-1-2forest_color_web2_thumb.jpg", "https://s3-us-west-1.amazonaws.com/zeport/zesansan.com+/Illustration/03+PROWL/Thumbs/03+2015-03-12+08.42_thumb.jpg", "https://s3-us-west-1.amazonaws.com/zeport/zesansan.com+/Illustration/03+PROWL/Thumbs/04+2015-03-14+15.35.45_thumb.jpg", "https://s3-us-west-1.amazonaws.com/zeport/zesansan.com+/Illustration/03+PROWL/Thumbs/05+2015-03-15+15.11.02_thumb.jpg", "https://s3-us-west-1.amazonaws.com/zeport/zesansan.com+/Illustration/03+PROWL/Thumbs/06+2015-03-17+10.20.09_thumb.jpg", "https://s3-us-west-1.amazonaws.com/zeport/zesansan.com+/Illustration/03+PROWL/Thumbs/07+2015-03-18+22.23.55_thumb.jpg", "https://s3-us-west-1.amazonaws.com/zeport/zesansan.com+/Illustration/03+PROWL/Thumbs/08+2015-03-18+22.24.53_thumb.jpg", "https://s3-us-west-1.amazonaws.com/zeport/zesansan.com+/Illustration/03+PROWL/Thumbs/09+2015-03-19+22.43.00_thumb.jpg", "https://s3-us-west-1.amazonaws.com/zeport/zesansan.com+/Illustration/03+PROWL/Thumbs/10+2015-03-19+22.48.28_thumb.jpg", "https://s3-us-west-1.amazonaws.com/zeport/zesansan.com+/Illustration/03+PROWL/Thumbs/11+2015-03-21+19.14.13_thumb.jpg", "https://s3-us-west-1.amazonaws.com/zeport/zesansan.com+/Illustration/03+PROWL/Thumbs/12+2015-03-21+19.17.41_thumb.jpg", "https://s3-us-west-1.amazonaws.com/zeport/zesansan.com+/Illustration/03+PROWL/Thumbs/13+2015-03-24+00.23.23_thumb.jpg", "https://s3-us-west-1.amazonaws.com/zeport/zesansan.com+/Illustration/03+PROWL/Thumbs/14+2015-03-26_thumb.jpg", "https://s3-us-west-1.amazonaws.com/zeport/zesansan.com+/Illustration/03+PROWL/Thumbs/15+2015-03-27+13.20.22_thumb.jpg", "https://s3-us-west-1.amazonaws.com/zeport/zesansan.com+/Illustration/03+PROWL/Thumbs/16+prowlgreen_web_thumb.jpg", "https://s3-us-west-1.amazonaws.com/zeport/zesansan.com+/Illustration/03+PROWL/Thumbs/17+prowlblue_web_thumb.jpg", "https://s3-us-west-1.amazonaws.com/zeport/zesansan.com+/Illustration/03+PROWL/Thumbs/18+prowlpurple_web_thumb.jpg", "https://s3-us-west-1.amazonaws.com/zeport/zesansan.com+/Illustration/03+PROWL/Thumbs/19+prowlred_web_thumb.jpg"],
 	  "sthumbs": ["data:image/gif;base64,R0lGODlhBAABAPEDAF1xZ1h4az6AaTOGcyH5BAAAAAAALAAAAAAEAAEAAAIDXCAFADs=", "data:image/gif;base64,R0lGODlhBAABAPEDAHdva4hlZpplZ6ZkcSH5BAAAAAAALAAAAAAEAAEAAAIDHCIFADs=", "data:image/gif;base64,R0lGODlhAwACAPIFABwiHjNyVk5mU1VoXWlxX1CEcgAAAAAAACH5BAAAAAAALAAAAAADAAIAAAMEKANRlAA7", "data:image/gif;base64,R0lGODlhBAADAPMLAD+RhY6RibW9vb3e18C7sNrY1NvY1N7d197e3eDd2OPg2OHg3gAAAAAAAAAAAAAAACH5BAAAAAAALAAAAAAEAAMAAAQJEJ01ShKAqBIiADs=", "data:image/gif;base64,R0lGODlhAgADAPIFAD85NnJgXINydolzc5x2jdLNwgAAAAAAACH5BAAAAAAALAAAAAACAAMAAAMEWBQCkwA7", "data:image/gif;base64,R0lGODlhBAADAPMLAEiBZHKUcHuniIaCeYmHhYuQiJWsqIPBppPUtJfQtJHZv53eywAAAAAAAAAAAAAAACH5BAAAAAAALAAAAAAEAAMAAAQJcKmEjgjAkDIiADs=", "data:image/gif;base64,R0lGODlhBgAFAPQdAAM4Jhg5KDweGC4yKjI5LDU7ODkzNjk8NDlMQE9JOUZDQUpPRVhRRFtQRGVdS2djT2VjU3txXmVyZHh3ZSyMcT2kjWaqj2bo0oaDbpyThJmpn8TOxdbLw+P//AAAAAAAACH5BAAAAAAALAAAAAAGAAUAAAUYoKR1W8YB1FUdVoAshUAMhsIkDDRhjxOFADs=", "data:image/gif;base64,R0lGODlhBAAGAPQXAC4cJCw9RTlZciplZ0EcH0Q3PFglJEBlbmVleWJ9fXpxaC+ccl+JbmGTd0ehh0yqhUewkYVcfYFuaY5/boCJfYiZiaa+scaivAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAACH5BAAAAAAALAAAAAAEAAYAAAUUoANZ1/RUEdNQxZJIxoAowCEERAgAOw==", "data:image/gif;base64,R0lGODlhBgAFAPQdABglJC5UTTpJUzptTTNhUT55UE1SQWlTRnZaQ2lzT3hvRiCHSCeHTSOHUX+/kodLLalLQMJUStpwVJ2Nb5GNcYG4j4ixjYW6koi8k5qihay0hqu4jYjAlbzKpAAAAAAAACH5BAAAAAAALAAAAAAGAAUAAAUY4IU5lcUxDWIQyxBEklAcCvQAibZNVNaFADs=", "data:image/gif;base64,R0lGODlhBgAFAPQdAEwnIlBNPXFWPk5PRltUUFVyS3BvSXhwY5Y2RrY4R5ddUoJrUJpiWJpzYMU7SoiGZIOFcLuDfNW8nPSSkM3MutvEtefXutvayPPlyvDoy/Dx3//z1fv13//75AAAAAAAACH5BAAAAAAALAAAAAAGAAUAAAUYIHVp01NBQ8MUy3YABCJ0UqAkBodZWeSEADs=", "data:image/gif;base64,R0lGODlhAwAEAPMLACFRN1hJL2hNNnJXOllbSVx+YH93VGtzeI5OH4h+Z4aIfYKOiAAAAAAAAAAAAAAAACH5BAAAAAAALAAAAAADAAQAAAQJ8CwFChEopGEiADs=", "data:image/gif;base64,R0lGODlhBAADAPMLAEhZTF9iVWdqaZhoWKGTiKmbi6Wyq6+8tLu9vLjAtsji0+fl3QAAAAAAAAAAAAAAACH5BAAAAAAALAAAAAAEAAMAAAQJUB20QChDmEQiADs=", "data:image/gif;base64,R0lGODlhAwACAPIFAGVwa0+QeoKUhZqbjJKwpLC4qwAAAAAAACH5BAAAAAAALAAAAAADAAIAAAMESBI1kAA7", "data:image/gif;base64,R0lGODlhAgABAPABAKW8tcm3tCH5BAAAAAAALAAAAAACAAEAAAICRAoAOw==", "data:image/gif;base64,R0lGODlhAgADAPIFABuubh6vbk6tg1ivhZi8sLe3rgAAAAAAACH5BAAAAAAALAAAAAACAAMAAAMESCUTkAA7", "data:image/gif;base64,R0lGODlhBAABAPEDAGqliG+rjXC7mnHJmyH5BAAAAAAALAAAAAAEAAEAAAIDFDIFADs=", "data:image/gif;base64,R0lGODlhAwACAPIFADhnZmZXS4mIjomImr7Z1MvT0AAAAAAAACH5BAAAAAAALAAAAAADAAIAAAMESDAVkgA7", "data:image/gif;base64,R0lGODlhAwACAPIFAGNfa3Jkhr3Lzc3Q4ufb2vTf1AAAAAAAACH5BAAAAAAALAAAAAADAAIAAAMESDEFkgA7", "data:image/gif;base64,R0lGODlhBAABAPEDAIWId5WEdKCnnMWhliH5BAAAAAAALAAAAAAEAAEAAAIDFDIFADs="],
 	  "slideshow": ["https://s3-us-west-1.amazonaws.com/zeport/zesansan.com+/Illustration/03+PROWL/01+2015-1-1forest_color_web1.jpg", "https://s3-us-west-1.amazonaws.com/zeport/zesansan.com+/Illustration/03+PROWL/02+2015-1-2forest_color_web2.jpg", "https://s3-us-west-1.amazonaws.com/zeport/zesansan.com+/Illustration/03+PROWL/03+2015-03-12+08.42.jpg", "https://s3-us-west-1.amazonaws.com/zeport/zesansan.com+/Illustration/03+PROWL/04+2015-03-14+15.35.45.jpg", "https://s3-us-west-1.amazonaws.com/zeport/zesansan.com+/Illustration/03+PROWL/05+2015-03-15+15.11.02.jpg", "https://s3-us-west-1.amazonaws.com/zeport/zesansan.com+/Illustration/03+PROWL/06+2015-03-17+10.20.09.jpg", "https://s3-us-west-1.amazonaws.com/zeport/zesansan.com+/Illustration/03+PROWL/07+2015-03-18+22.23.55.jpg", "https://s3-us-west-1.amazonaws.com/zeport/zesansan.com+/Illustration/03+PROWL/08+2015-03-18+22.24.53.jpg", "https://s3-us-west-1.amazonaws.com/zeport/zesansan.com+/Illustration/03+PROWL/09+2015-03-19+22.43.00.jpg", "https://s3-us-west-1.amazonaws.com/zeport/zesansan.com+/Illustration/03+PROWL/10+2015-03-19+22.48.28.jpg", "https://s3-us-west-1.amazonaws.com/zeport/zesansan.com+/Illustration/03+PROWL/11+2015-03-21+19.14.13.jpg", "https://s3-us-west-1.amazonaws.com/zeport/zesansan.com+/Illustration/03+PROWL/12+2015-03-21+19.17.41.jpg", "https://s3-us-west-1.amazonaws.com/zeport/zesansan.com+/Illustration/03+PROWL/13+2015-03-24+00.23.23.jpg", "https://s3-us-west-1.amazonaws.com/zeport/zesansan.com+/Illustration/03+PROWL/14+2015-03-26+a.jpg", "https://s3-us-west-1.amazonaws.com/zeport/zesansan.com+/Illustration/03+PROWL/15+2015-03-27+13.20.22.jpg", "https://s3-us-west-1.amazonaws.com/zeport/zesansan.com+/Illustration/03+PROWL/16+prowlgreen_web.jpg", "https://s3-us-west-1.amazonaws.com/zeport/zesansan.com+/Illustration/03+PROWL/17+prowlblue_web.jpg", "https://s3-us-west-1.amazonaws.com/zeport/zesansan.com+/Illustration/03+PROWL/18+prowlpurple_web.jpg", "https://s3-us-west-1.amazonaws.com/zeport/zesansan.com+/Illustration/03+PROWL/19+prowlred_web.jpg"],
-	  "dimensions": [["8327px", "2126px"], ["8327px", "2126px"], ["3264px", "2448px"], ["800px", "600px"], ["2448px", "3264px"], ["800px", "600px"], ["1280px", "960px"], ["956px", "1280px"], ["1280px", "960px"], ["1280px", "960px"], ["600px", "800px"], ["800px", "600px"], ["3264px", "2448px"], ["5664px", "3404px"], ["842px", "1192px"], ["2414px", "600px"], ["900px", "600px"], ["900px", "600px"], ["2365px", "600px"]]
+	  "dimensions": [["8327px", "2126px"], ["8327px", "2126px"], ["3264px", "2448px"], ["800px", "600px"], ["2448px", "3264px"], ["800px", "600px"], ["1280px", "960px"], ["956px", "1280px"], ["1280px", "960px"], ["1280px", "960px"], ["600px", "800px"], ["800px", "600px"], ["3264px", "2448px"], ["5664px", "3404px"], ["842px", "1192px"], ["2414px", "600px"], ["629px", "627px"], ["629px", "754px"], ["2365px", "600px"]]
 	}, {
 	  "name": "Love Knows No Boundaries",
 	  "type": "Illustration",
