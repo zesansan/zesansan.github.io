@@ -26853,7 +26853,7 @@
 	          _react2.default.createElement(
 	            _reactRouter.Link,
 	            { to: '/about', onClick: function onClick() {
-	                _this2.props.setShowcaseItem(30);_this2.props.setFilter('All');
+	                _this2.props.setFilter('All');
 	              }, className: this.props.params.route === "about" ? 'active-route button underline' : 'button underline' },
 	            'About'
 	          ),
@@ -36699,7 +36699,7 @@
 	  "shape": 2,
 	  "bthumb": "data:image/gif;base64,R0lGODlhAQABAIABAOvh0wAAACwAAAAAAQABAAACAkQBAA==",
 	  "brick": "https://s3-us-west-1.amazonaws.com/zeport/zesansan.com+/Animation/Unbox+Yourself/Brick/01+Unbox_br.jpg",
-	  "slideshow": ["https:/player.vimeo.com/video/109559530"]
+	  "slideshow": ["https://player.vimeo.com/video/109559530"]
 	}, {
 	  "name": "Exercise Often",
 	  "type": "Illustration",

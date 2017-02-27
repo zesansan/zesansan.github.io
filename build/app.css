@@ -26,14 +26,15 @@ svg:hover {
 
 .button-bar {
   z-index: 0;
-  margin: 200px 0 0;
+  margin: 200px 0 2%;
   text-align: center; }
 
 .header-bar {
   margin: 0;
   position: fixed;
   top: 0;
-  width: 100%; }
+  width: 100%;
+  text-align: center; }
 
 .button-container {
   width: 75%;
@@ -75,7 +76,7 @@ svg:hover {
   text-align: center;
   font-size: 30px;
   transition: 0s;
-  margin: 0 2% 2%;
+  margin: 0 2%;
   padding: 0 1%;
   cursor: pointer;
   -webkit-transition: 0s; }
@@ -140,6 +141,12 @@ svg:hover {
     font-size: 13px; }
     .button.filter {
       font-size: 12px; } }
+
+@media (max-width: 400px) {
+  .button {
+    font-size: 13px; }
+    .button.filter {
+      font-size: 12px; } }
 .u-clearfix {
   overflow: hidden; }
 .header {
@@ -162,8 +169,7 @@ svg:hover {
   vertical-align: middle;
   line-height: 60px;
   font-family: Helvetica, sans-serif;
-  font-weight: bold;
-  height: 140px; }
+  font-weight: bold; }
 
 .title:hover {
   color: aquamarine;
@@ -195,7 +201,6 @@ svg:hover {
   padding: 0 0 15px; }
 
 .work {
-  height: 140px;
   display: inline-block; }
 
 .socialButtons {
@@ -203,7 +208,7 @@ svg:hover {
   top: 0;
   right: 0;
   padding: inherit;
-  margin: 0 15px 2px;
+  margin: 0 2% 2%;
   width: 25%;
   height: 50px;
   text-align: right; }
@@ -224,19 +229,32 @@ svg:hover {
   height: 50%;
   width: auto; }
 
+.work.shrink.header {
+  height: 125px; }
+
 @media (max-width: 1000px) {
+  .button-container {
+    height: 60px; }
+  .button-subbar {
+    height: 50px; }
   .button {
     font-size: 25px; }
     .button.filter {
       font-size: 24px; }
   .button-bar {
-    margin: 0; }
+    margin: 0 0 2%; }
   .media {
     height: 45%; }
   .mail {
-    height: 45%; } }
+    height: 45%; }
+  .work.shrink.header {
+    height: 125px; } }
 
 @media (max-width: 800px) {
+  .button-container {
+    height: 60px; }
+  .button-subbar {
+    height: 50px; }
   .button {
     font-size: 20px; }
     .button.filter {
@@ -247,6 +265,10 @@ svg:hover {
     height: 40%; } }
 
 @media (max-width: 700px) {
+  .button-container {
+    height: 60px; }
+  .button-subbar {
+    height: 50px; }
   .button {
     font-size: 15px; }
     .button.filter {
@@ -259,6 +281,10 @@ svg:hover {
     padding: 4px; } }
 
 @media (max-width: 500px) {
+  .button-container {
+    height: 60px; }
+  .button-subbar {
+    height: 50px; }
   .button {
     font-size: 13px; }
     .button.filter {
@@ -271,16 +297,22 @@ svg:hover {
     padding: 3px; } }
 
 @media (max-width: 400px) {
+  .button-container {
+    height: 60px; }
+  .button-subbar {
+    height: 50px; }
   .button {
     font-size: 10px; }
     .button.filter {
-      font-size: 8px; }
+      font-size: 9px; }
   .media {
     height: 25%; }
   .mail {
     height: 25%; }
   .social {
-    padding: 2px; } }
+    padding: 2px; }
+  .work.shrink.header {
+    height: 115px; } }
 .gallery-container {
   z-index: 1;
   overflow: hidden; }
@@ -442,7 +474,7 @@ table {
   width: 500px;
   box-sizing: border-box;
   margin: auto;
-  text-align: justify; }
+  text-align: left; }
 
 .name {
   font-weight: bold; }
