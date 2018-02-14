@@ -4,46 +4,54 @@ import SectionLabel from './SectionLabel';
 import BackgroundCard from './BackgroundCard';
 import AList from './AList';
 import { languages, frameworks, libraries, databases } from './const';
-import Grid from 'material-ui/Grid';
+import { Flex, Box } from 'grid-styled';
 import './App.css';
 
-class App extends Component {
-  render() {
-    return (
-      <Grid container spacing={20}>
-        <Grid item xs>
-          <Grid container spacing={24}>
-            <Grid item xs>
-              <HeaderCard />
-            </Grid>
-          </Grid>
-          <Grid container spacing={24}>
-            <Grid item xs>
-              <SectionLabel sectionName="BACKGROUND" />
-            </Grid>
-            <Grid item xs>
-              <BackgroundCard />
-            </Grid>
-          </Grid>
-          <Grid container>
-            <Grid item>
-              <SectionLabel sectionName="SKILLS" />
-            </Grid>
-            <Grid item>
-              <Grid container>
-                <AList listTitle="LANGUAGES" listItems={languages} />
-                <AList listTitle="FRAMEWORKS" listItems={frameworks} />
-                <AList listTitle="LIBRARIES" listItems={libraries} />
-                <AList listTitle="DATABASES" listItems={databases} />
-              </Grid>
-            </Grid>
-          </Grid>
+const App = () => {
+  return (
+    <div>
+      <Flex>
+        <HeaderCard />
+      </Flex>
+      <Flex>
+        <Box width={1 / 4}>
+          <SectionLabel sectionName="BACKGROUND" />
+        </Box>
+        <Box>
+          <BackgroundCard />
+        </Box>
+      </Flex>
+      <Flex wrap>
+        <Box width={1 / 4}>
+          <SectionLabel sectionName="SKILLS" />
+        </Box>
+        <Flex pl={3} wrap>
+          <Box width={[1 / 3, 1 / 5]} mr={3}>
+            <AList listTitle="LANGUAGES" listItems={languages} />
+          </Box>
+          <Box width={[1 / 3, 1 / 5]} mr={3}>
+            <AList listTitle="FRAMEWORKS" listItems={frameworks} />
+          </Box>
+          <Box width={[1 / 3, 1 / 5]} mr={3}>
+            <AList listTitle="LIBRARIES" listItems={libraries} />
+          </Box>
+          <Box width={[1 / 3, 1 / 5]} mr={3}>
+            <AList listTitle="DATABASES" listItems={databases} />
+          </Box>
+        </Flex>
+      </Flex>
+      <Flex>
+        <Box width={1 / 4}>
           <SectionLabel sectionName="EXPERIENCE" />
+        </Box>
+      </Flex>
+      <Flex>
+        <Box width={1 / 4}>
           <SectionLabel sectionName="PROJECTS" />
-        </Grid>
-      </Grid>
-    );
-  }
-}
+        </Box>
+      </Flex>
+    </div>
+  );
+};
 
 export default App;
