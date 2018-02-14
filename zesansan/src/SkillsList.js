@@ -5,6 +5,7 @@ import List, { ListItem, ListItemText } from 'material-ui/List';
 
 const styles = theme => ({
   root: {
+    marginTop: 7,
     minWidth: 100,
     maxWidth: 150
   },
@@ -20,13 +21,13 @@ const styles = theme => ({
   }
 });
 
-const AList = props => {
+const SkillsList = props => {
   const { classes } = props;
   const ListContent = props.listItems.map((prop, idx) => (
     <ListItem key={idx}>
       <ListItemText
         primary={prop}
-        disableTypography="false"
+        disableTypography={true}
         className={classes.item}
       />
     </ListItem>
@@ -41,4 +42,4 @@ const AList = props => {
   );
 };
 
-export default withStyles(styles)(AList);
+export default withStyles(styles)(SkillsList);

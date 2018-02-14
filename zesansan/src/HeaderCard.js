@@ -34,16 +34,22 @@ const HeaderCard = props => {
   return (
     <div className={classes.card}>
       <CardContent>
-        <Typography className={classes.title}>hello fren, it's me.</Typography>
+        <Typography className={classes.title}>
+          Hello, <Emoji text=":wave:" />.
+        </Typography>
         <Typography className={classes.bodyText}>
-          I'm Zejian (ZEE-jen) Shen, an artist turned <Emoji text=":baby:" />{' '}
-          software engineer based in SF and living that{' '}
-          <em>cowabunga lifestyle</em>.
+          My name is Zejian (ZEE-<em>jen</em>), I am a full stack web developer
+          and
+          <Emoji text=" cute animal petter :dog: based in SF." />
         </Typography>
         <Typography className={classes.git}>
-          get in touch <Emoji text=":wave:" />{' '}
-          <a href="" className={classes.link}>
+          Get in touch{' '}
+          <a href="mailto:zesansan@gmail.com" className={classes.link}>
             zesansan@gmail.com
+          </a>{' '}
+          or <Emoji text=":eyes:" />{' '}
+          <a href="/ZejianResume.pdf" className={classes.link}>
+            resume
           </a>.
         </Typography>
       </CardContent>
