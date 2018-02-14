@@ -1,5 +1,5 @@
 import React from 'react';
-import { CardActions, CardContent } from 'material-ui/Card';
+import { CardContent } from 'material-ui/Card';
 import { withStyles } from 'material-ui/styles';
 import Typography from 'material-ui/Typography';
 import Emoji from 'react-emoji-render';
@@ -11,14 +11,17 @@ const styles = theme => ({
   },
   title: {
     fontSize: 30,
+    fontWeight: 700,
     color: theme.palette.text.primary
   },
   bodyText: {
     fontSize: 20,
+    fontWeight: 500,
     color: theme.palette.text.primary,
     marginBottom: 20
   },
   git: {
+    fontWeight: 600,
     fontSize: 18
   },
   link: {
