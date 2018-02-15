@@ -31,26 +31,33 @@ const Footer = props => {
             This website is made by Zejian Shen in 2018.
           </Typography>
         </Box>
-        <Box width={[1 / 3, 1 / 7]} mr={10}>
-          <Typography className={classes.bodyText}>
-            <a href="" className={classes.link}>
-              GITHUB
-            </a>
-          </Typography>
-        </Box>
-        <Box width={[1 / 3, 1 / 7]} mr={10}>
-          <Typography className={classes.bodyText}>
-            <a href="" className={classes.link}>
-              LINKEDIN
-            </a>
-          </Typography>
-        </Box>
-        <Box width={[1 / 3, 1 / 7]} mr={10}>
-          <Typography className={classes.bodyText}>
-            <a href="" className={classes.link}>
-              ANGELIST
-            </a>
-          </Typography>
+        <Box width={[1, 1 / 3]}>
+          <Flex>
+            <Box width={[1 / 3, 1 / 3]} mr={3}>
+              <Typography className={classes.bodyText}>
+                <a href="https://github.com/zesansan" className={classes.link}>
+                  GITHUB
+                </a>
+              </Typography>
+            </Box>
+            <Box width={[1 / 3, 1 / 3]} mr={3}>
+              <Typography className={classes.bodyText}>
+                <a
+                  href="https://www.linkedin.com/in/zejianshen/"
+                  className={classes.link}
+                >
+                  LINKEDIN
+                </a>
+              </Typography>
+            </Box>
+            <Box width={[1 / 3, 1 / 3]} mr={3}>
+              <Typography className={classes.bodyText}>
+                <a href="https://twitter.com/zesansan" className={classes.link}>
+                  TWITTER
+                </a>
+              </Typography>
+            </Box>
+          </Flex>
         </Box>
       </Flex>
     </CardContent>

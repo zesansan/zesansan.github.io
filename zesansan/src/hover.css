@@ -1,0 +1,21 @@
+#theRelish {
+  min-width: 300;
+  max-width: 600;
+  margin-top: 20;
+}
+
+#overlay {
+  background: rgba(255, 255, 255, 255);
+  text-align: center;
+  padding: 45px 0 66px 0;
+  opacity: 0;
+  z-index: 1;
+  top: -300px;
+  position: relative;
+  -webkit-transition: opacity 0.25s ease;
+  -moz-transition: opacity 0.25s ease;
+}
+
+#theRelish:hover #overlay {
+  opacity: 1;
+}
