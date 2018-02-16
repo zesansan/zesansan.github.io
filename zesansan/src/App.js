@@ -11,7 +11,9 @@ import { Flex, Box } from 'grid-styled';
 const App = () => {
   return (
     <div>
-      <HeaderCard />
+      <Box ml={30}>
+        <HeaderCard />
+      </Box>
       <Flex wrap>
         <Box width={[1, 1, 1 / 4, 1 / 4]}>
           <SectionLabel sectionName="BACKGROUND" />
@@ -49,7 +51,9 @@ const App = () => {
           <Projects />
         </Box>
       </Flex>
-      <Footer />
+      <Box ml={30}>
+        <Footer />
+      </Box>
     </div>
   );
 };

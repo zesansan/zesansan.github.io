@@ -20,41 +20,22 @@ const styles = theme => ({
   }
 });
 
-class Hover extends Component {
-  constructor(props) {
-    super(props);
-    this.state = {
-      hover: false
-    };
-    this.showHover = this.showHover.bind(this);
-    this.hideHover = this.hideHover.bind(this);
-  }
-  showHover() {
-    this.setState({ hover: true });
-  }
-  hideHover() {
-    this.setState({ hover: false });
-  }
-  render() {
-    const { classes } = this.props;
-    const HoverRender = this.state.hover ? (
-      <div className="hover-card" onMouseLeave={this.hideHover}>
-        <h1 className={classes.title}>{this.props.title}</h1>
-        <p className={classes.bodyText}>{this.props.info}</p>
-        <Button href={this.props.projectLink} target="_blank">
-          <Typography className={classes.button}>LEARN MORE</Typography>
+const Hover = props => {
+  const { classes } = props;
+  const style = {
+    backgroundImage: `url(${props.image})`
+  };
+  return (
+    <div className="card image-style" style={style}>
+      <div className="overlay">
+        <h1 className={classes.title}>{props.title}</h1>
+        <p className={classes.bodyText}>{props.info}</p>
+        <Button href={props.projectLink} target="_blank">
+          <h4 className={classes.button}>LEARN MORE</h4>
         </Button>
       </div>
-    ) : (
-      <img
-        src={this.props.image}
-        className="card"
-        onMouseOver={this.showHover}
-        alt={this.props.alternativeText}
-      />
-    );
-    return <div>{HoverRender}</div>;
-  }
-}
+    </div>
+  );
+};
 
 export default withStyles(styles)(Hover);
