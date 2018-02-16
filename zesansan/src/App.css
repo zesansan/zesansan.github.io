@@ -2,32 +2,72 @@
   position: relative;
   margin-left: 20px;
 }
-
-.App-logo {
-  animation: App-logo-spin infinite 20s linear;
-  height: 80px;
+.card {
+  position: relative;
+  margin-top: 20px;
+}
+.image-style {
+  border-radius: 6px;
+  min-height: 360px;
+  background-position: center;
+  background-size: cover;
+  transition: opacity 0.3s ease;
+}
+.overlay {
+  opacity: 0;
+  position: absolute;
+  top: 0;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  z-index: 100;
+  background-color: white;
+  border: 9px solid #304ffe;
+  color: #304ffe;
+  border-radius: 6px;
+  text-align: center;
+  padding: 50px 100px;
+  transition: opacity 0.3s ease;
 }
 
-.App-header {
-  background-color: #222;
-  height: 150px;
-  padding: 20px;
-  color: white;
+.card:hover .overlay {
+  opacity: 1;
 }
 
-.App-title {
-  font-size: 1.5em;
+.card:hover .image-style {
+  opacity: 0;
 }
 
-.App-intro {
-  font-size: large;
+a:link {
+  color: #304ffe;
+  text-decoration: none;
+  transition: background 0.3s ease, color 0.3s ease;
+}
+a:visited {
+  color: #304ffe;
+  text-decoration: none;
+}
+a:hover {
+  color: #FFFF;
+  background: #304ffe;
+  text-decoration: none;
 }
 
-@keyframes App-logo-spin {
-  from {
-    transform: rotate(0deg);
-  }
-  to {
-    transform: rotate(360deg);
-  }
+a:active {
+  color: #304ffe;
+  text-decoration: none;
+}
+
+button {
+  border: none;
+  color: #212121;
+  font-size: 15px;
+  background: #ffffff;
+  transition: background 0.5s ease, color 0.5s ease;
+}
+
+button:hover {
+  color: #ffffff;
+  background: #304ffe;
+  cursor: pointer;
 }

@@ -3,6 +3,7 @@ import { CardContent } from 'material-ui/Card';
 import { withStyles } from 'material-ui/styles';
 import Typography from 'material-ui/Typography';
 import Emoji from 'react-emoji-render';
+import './App.css';
 
 const styles = theme => ({
   card: {
@@ -23,9 +24,6 @@ const styles = theme => ({
   git: {
     fontWeight: 600,
     fontSize: 18
-  },
-  link: {
-    color: '#304FFE'
   }
 });
 
@@ -44,10 +42,8 @@ const HeaderCard = props => {
         </Typography>
         <Typography className={classes.git}>
           Get in touch{' '}
-          <a href="mailto:zesansan@gmail.com" className={classes.link}>
-            zesansan@gmail.com
-          </a>{' '}
-          or <Emoji text=":eyes:" />{' '}
+          <a href="mailto:zesansan@gmail.com">zesansan@gmail.com</a> or{' '}
+          <Emoji text=":eyes:" />{' '}
           <a href="/ZejianResume.pdf" className={classes.link}>
             resume
           </a>.

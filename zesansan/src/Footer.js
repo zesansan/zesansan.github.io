@@ -15,9 +15,6 @@ const styles = theme => ({
     fontWeight: 600,
     color: theme.palette.text.primary,
     marginBottom: 20
-  },
-  link: {
-    color: '#304FFE'
   }
 });
 
@@ -28,7 +25,7 @@ const Footer = props => {
       <Flex wrap>
         <Box width={[1, 1 / 3]} mr={100}>
           <Typography className={classes.bodyText}>
-            This website is made by Zejian Shen in 2018.
+            This website is made by yours truly using ReactJS in 2018.
           </Typography>
         </Box>
         <Box width={[1, 1 / 3]}>

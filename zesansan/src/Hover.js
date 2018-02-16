@@ -1,8 +1,6 @@
 import React, { Component } from 'react';
-import './hover.css';
-import Button from 'material-ui/Button';
+import './App.css';
 import { withStyles } from 'material-ui/styles';
-import Typography from 'material-ui/Typography';
 
 const styles = theme => ({
   title: {
@@ -12,7 +10,8 @@ const styles = theme => ({
   button: {
     fontSize: 15,
     fontWeight: 600,
-    color: theme.palette.text.secondary
+    color: '#FFFFFF',
+    backgroundColor: '#304ffe'
   },
   bodyText: {
     fontSize: 15,
@@ -30,9 +29,9 @@ const Hover = props => {
       <div className="overlay">
         <h1 className={classes.title}>{props.title}</h1>
         <p className={classes.bodyText}>{props.info}</p>
-        <Button href={props.projectLink} target="_blank">
-          <h4 className={classes.button}>LEARN MORE</h4>
-        </Button>
+        <button href={props.projectLink} target="_blank">
+          LEARN MORE
+        </button>
       </div>
     </div>
   );
