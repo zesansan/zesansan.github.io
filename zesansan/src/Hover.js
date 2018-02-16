@@ -5,10 +5,6 @@ import { withStyles } from 'material-ui/styles';
 import Typography from 'material-ui/Typography';
 
 const styles = theme => ({
-  card: {
-    minWidth: 275,
-    maxWidth: 600
-  },
   title: {
     fontSize: 30,
     fontWeight: 700
@@ -20,8 +16,7 @@ const styles = theme => ({
   },
   bodyText: {
     fontSize: 15,
-    fontWeight: 500,
-    marginBottom: 20
+    fontWeight: 500
   }
 });
 
