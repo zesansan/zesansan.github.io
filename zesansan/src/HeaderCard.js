@@ -35,7 +35,7 @@ const HeaderCard = props => {
     <div className={classes.card}>
       <CardContent>
         <Typography className={classes.title}>
-          Hello, <Emoji text=":wave:" />.
+          <Emoji text=":wave: " />Hello.
         </Typography>
         <Typography className={classes.bodyText}>
           My name is Zejian (ZEE-<em>jen</em>), I am a full stack web developer
