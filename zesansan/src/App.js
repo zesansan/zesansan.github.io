@@ -1,4 +1,4 @@
-import React, { Component } from 'react';
+import React from 'react';
 import HeaderCard from './HeaderCard';
 import SectionLabel from './SectionLabel';
 import BackgroundCard from './BackgroundCard';
