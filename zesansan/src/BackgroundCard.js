@@ -21,8 +21,8 @@ const BackgroundCard = props => {
       <CardContent>
         <Typography className={classes.bodyText}>
           Web developer experienced with ReactJS/Redux, Node.js, Express,
-          JavaScript and Python. I'm always looking for opportunities to learn
-          and collaborate with other programmers. Feel free to browse around my
+          JavaScript and Python. I'm always looking for opportunities to
+          collaborate with other programmers. Feel free to browse around my
           portfolio and get in contact with me.{' '}
         </Typography>
       </CardContent>

@@ -29,8 +29,11 @@ const Hover = props => {
       <div className="overlay">
         <h1 className={classes.title}>{props.title}</h1>
         <p className={classes.bodyText}>{props.info}</p>
-        <button href={props.projectLink} target="_blank">
-          LEARN MORE
+        <br />
+        <button>
+          <a href={props.projectLink} target="_blank">
+            LEARN MORE
+          </a>
         </button>
       </div>
     </div>

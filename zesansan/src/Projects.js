@@ -8,14 +8,16 @@ const Projects = props => {
     <div>
       <Hover
         title="The Relish"
-        info="full stack implementation"
-        projectLink="http://therelish.com"
+        info="A sports video network for female fans aimed at revolutionizing the social fan experience.
+"
+        projectLink="http://ambassadors.therelish.com"
         image={TheRelish}
         alternativeText="The Relish"
       />
       <Hover
         title="Tunelark"
-        info="full stack implementation"
+        info="Music education platform that develops games to teach music theory, ear training and sight-reading.
+"
         projectLink="http://tunelark.com"
         image={Tunelark}
         alternativeText="Tunelark"
