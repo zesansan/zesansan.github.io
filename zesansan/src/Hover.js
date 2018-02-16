@@ -55,6 +55,7 @@ class Hover extends Component {
         src={this.props.image}
         className="card"
         onMouseOver={this.showHover}
+        alt={this.props.alternativeText}
       />
     );
     return <div>{HoverRender}</div>;

@@ -11,12 +11,14 @@ const Projects = props => {
         info="full stack implementation"
         projectLink="http://therelish.com"
         image={TheRelish}
+        alternativeText="The Relish"
       />
       <Hover
         title="Tunelark"
         info="full stack implementation"
         projectLink="http://tunelark.com"
         image={Tunelark}
+        alternativeText="Tunelark"
       />
     </div>
   );
